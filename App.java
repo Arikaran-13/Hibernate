@@ -16,16 +16,19 @@ public class App
     public static void main( String[] args )
     {
        Alien a = new Alien();
-       a.setAid(104);
-       a.setAname("joe");
-       a.setColour("pink");
+       a.setAid(106);
+       a.setAname("jacky");
+       a.setColour("green");
        
        Configuration c = new Configuration().configure().addAnnotatedClass(Alien.class);
        ServiceRegistry sr = new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
        SessionFactory sf = c.buildSessionFactory(sr); 
        Session session = sf.openSession();
        Transaction tx = session.beginTransaction();
-       session.save(a);
+      // session.save(a); // it will save the data into database
+       Alien a1 = (Alien)session.get(Alien.class, 106);//using id , we fetching
+       // this get method will return obj ref so typecast to Alien
        tx.commit();
+       System.out.println(a1);
     }
 }

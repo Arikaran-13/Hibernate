@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 public class Alien {
 	@Id//primary key
 	private int aid;
-	@Transient // this aname coloumn will not be persisted or saved inside database;
+	//@Transient // this aname coloumn will not be persisted or saved inside database;
 	private String aname;
 	@Column(name="Alien_colour")//changes the cloumn name colour to "Alien_colour"
 	private String colour;
@@ -34,5 +34,9 @@ public class Alien {
 		this.colour = colour;
 	}
 	
-
+@Override
+public String toString() {
+	
+	return aname+" "+aid+" "+colour;
+}
 }
