@@ -11,20 +11,25 @@ import javax.persistence.Transient;
 public class Alien {
 	@Id//primary key
 	private int aid;
+	
 	//@Transient // this aname coloumn will not be persisted or saved inside database;
-	private String aname;
+	private AlienName aname;
+
+  
 	@Column(name="Alien_colour")//changes the cloumn name colour to "Alien_colour"
 	private String colour;
+	
 	public int getAid() {
 		return aid;
 	}
 	public void setAid(int aid) {
 		this.aid = aid;
 	}
-	public String getAname() {
+	
+	public AlienName getAname() {
 		return aname;
 	}
-	public void setAname(String aname) {
+	public void setAname(AlienName aname) {
 		this.aname = aname;
 	}
 	public String getColour() {
