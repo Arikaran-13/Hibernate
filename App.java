@@ -1,7 +1,8 @@
-package com.arikaran.DemoHibernate;
+package com.arikaran.DemoHib2;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -12,10 +13,15 @@ public class App
 {
     public static void main( String[] args )
     {
-       Student s1 = new Student("Ari",101,"Green");
-       Configuration c = new Configuration(); 
-       SessionFactory sf = c.buildSessionFactory();
+       Student s1 = new Student();
+       s1.setName("ari");
+       s1.setId(1);
+       s1.setStd(12);
+       Configuration c = new Configuration().configure().addAnnotatedClass(Student.class);
+       SessionFactory sf =c.buildSessionFactory();
        Session s = sf.openSession();
-      s.save(s1); // this data should be saved in the database
+       Transaction tx = s.beginTransaction();
+       s.save(s1);
+   tx.commit();
     }
 }

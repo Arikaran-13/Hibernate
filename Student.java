@@ -1,33 +1,32 @@
-package com.arikaran.DemoHibernate;
+package com.arikaran.DemoHib2;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
-	
-	public Student(String name, int id, String colour) {
-		
-		this.name = name;
-		this.id = id;
-		this.colour = colour;
-	}
-	private String name;
+	@Id
 	private int id;
-	private String colour;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	private String name;
+	private int std;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getColour() {
-		return colour;
+	public String getName() {
+		return name;
 	}
-	public void setColour(String colour) {
-		this.colour = colour;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getStd() {
+		return std;
+	}
+	public void setStd(int std) {
+		this.std = std;
 	}
 	
+
 }
