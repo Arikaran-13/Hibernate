@@ -1,4 +1,4 @@
-package com.arikaran.Demohib3;
+package com.arikaran.Demohib4;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,26 +15,24 @@ public class App
 {
     public static void main( String[] args )
     {
-    	
-    	AlienName an = new AlienName();
-    	an.setFname("Ari");
-    	an.setMname("karan");
-    	an.setLname("Sivasankar");
-       Alien a = new Alien();
-       a.setAid(107);
-       a.setAname(an);
-       a.setColour("red");
-       
-       Configuration c = new Configuration().configure().addAnnotatedClass(Alien.class);
-       ServiceRegistry sr = new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
-       SessionFactory sf = c.buildSessionFactory(sr); 
-       Session session = sf.openSession();
-       Transaction tx = session.beginTransaction();
-      // session.save(a); // it will save the data into database
-      // Alien a1 = (Alien)session.get(Alien.class, 105);//using id , we fetching
-       // this get method will return obj ref so typecast to Alien
-       session.save(a);
-       tx.commit();
-      
+    	Laptop l1 = new Laptop();
+    	l1.setLid(101);
+    	l1.setLname("Dell");
+    
+        Student s1 = new Student(); 
+        s1.setId(1);
+        s1.setMarks(90);
+        s1.setName("Ari");
+        s1.setLaptop(l1);
+        
+        Configuration c = new Configuration().configure().addAnnotatedClass(Laptop.class).addAnnotatedClass(Student.class);
+        ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
+        SessionFactory sf = c.buildSessionFactory(reg);
+        Session session = sf.openSession();
+        
+        Transaction tx = session.beginTransaction(); 
+        session.save(s1);
+        session.save(l1);
+        tx.commit();
     }
 }
