@@ -1,7 +1,10 @@
 package com.arikaran.Demohib4;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -11,14 +14,14 @@ public class Student {
 	private int id;
 	private String name;
 	private int marks;
-	@OneToOne // joining two tables using one to oen relation (it will automatically join using 
+	@OneToMany(mappedBy = "student")// joining two tables using one to oen relation (it will automatically join using 
 	//primary key of Laptop table)
-	private Laptop laptop;
+	private List<Laptop> laptop;
 	
-	public Laptop getLaptop() {
+	public List<Laptop> getLaptop() {
 		return laptop;
 	}
-	public void setLaptop(Laptop laptop) {
+	public void setLaptop(List<Laptop> laptop) {
 		this.laptop = laptop;
 	}
 	public int getId() {
