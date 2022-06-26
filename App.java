@@ -1,7 +1,4 @@
-package com.arikaran.Demohib4;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.arikaran.Demohib3;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,33 +15,51 @@ public class App
 {
     public static void main( String[] args )
     {
-    	Laptop l1 = new Laptop();
-    	l1.setLid(103);
-    	l1.setLname("Mac OS");
-    List<Laptop> l = new ArrayList<Laptop>();
-    l.add(l1);
-        Student s1 = new Student(); 
-        s1.setId(3);
-        s1.setMarks(77);
-        s1.setName("kamal");
-       s1.setLaptop(l);
-        
-        Configuration c = new Configuration().configure().addAnnotatedClass(Laptop.class).addAnnotatedClass(Student.class);
-        ServiceRegistry reg = new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
-        SessionFactory sf = c.buildSessionFactory(reg);
-        Session session = sf.openSession();
-        
-        Transaction tx = session.beginTransaction(); 
-		/*
-		 * session.save(s1); session.save(l1);
-		 */
-        Student student  = (Student)session.get(Student.class, 1);
-        tx.commit();
-        System.out.println("Hi");
-		/*
-		 * List<Laptop>lap = student.getLaptop(); for(Laptop i : lap) {
-		 * System.out.println(i); }
-		 */
-        System.out.println(student);
+    	
+    	Employee e1 = new Employee();
+    	e1.setId(5);
+    	e1.setName("Natasha");
+    	
+    	
+       
+       
+       Configuration c = new Configuration().configure().addAnnotatedClass(Employee.class);
+       
+       
+       ServiceRegistry sr = new ServiceRegistryBuilder().applySettings(c.getProperties()).buildServiceRegistry();
+       
+       
+       SessionFactory sf = c.buildSessionFactory(sr);
+       
+       Session session1 = sf.openSession();
+       
+       Transaction tx = session1.beginTransaction();
+      
+      Employee emp1 = (Employee)session1.get(Employee.class, 1);
+    System.out.println("Fetching 1st time: "+emp1); // fetching first time		
+    session1.getTransaction().commit();
+    
+    session1.close();
+    
+    
+    Session session2 = sf.openSession();
+    
+    Transaction tx1 = session2.beginTransaction();
+    
+    Employee emp2 = (Employee)session2.get(Employee.class, 1);
+    
+    System.out.println("Fetching 2nd time: "+emp2);	//fetching 2nd time using diff session
+    session2.getTransaction().commit();
+    
+    session2.close();
+      
+       // we are fetching same data for 2 times and its hitting the database for 2 times to fetch
+    // the same value because each session has :
+                     // first level catch and sescond level cache
+    // so first it will check the req value in first and second lvel if not there it 
+    // hitting the data base to fetch the req value  
+      
+       
+      
     }
 }
