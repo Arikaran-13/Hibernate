@@ -10,7 +10,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name="Employee_Table")
+//@Table(name="Employee_Table")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Employee {
